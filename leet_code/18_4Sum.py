@@ -76,13 +76,13 @@ class FourSum:
         if nums[start] * 2 > target or max * 2 < target:
             return
         i, j = start, length
-        while(i < j):
+        while i < j:
             sum = nums[i] + nums[j]
             if sum == target:
                 result.append(z, z1, nums[i], nums[j])
-                while(i + 1 < j and nums[i] == nums[i + 1]):
+                while i + 1 < j and nums[i] == nums[i + 1]:
                     i += 1
-                while(j - 1 > i and nums[j] == nums[j - 1]):
+                while j - 1 > i and nums[j] == nums[j - 1]:
                     j -= 1
                 i += 1
                 j -= 1
