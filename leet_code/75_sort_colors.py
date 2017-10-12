@@ -9,27 +9,40 @@
 class SortColors:
 
     def solution1(self, nums):
-        result = []
         if not nums:
-            return result
+            return
         lo, hi, index = 0, len(nums) - 1, 1
         while index <= hi:
             if nums[index] == 0:
-                nums[index] ^= nums[lo]
-                nums[lo] ^= nums[index]
-                nums[index] ^= nums[lo]
+                self.exchange(nums, index, lo)
                 index += 1
                 lo += 1
             elif nums[index] == 1:
                 index += 1
             else:
-                nums[index] ^= nums[hi]
-                nums[hi] ^= nums[index]
-                nums[index] ^= nums[hi]
+                self.exchange(nums, index, hi)
                 hi -= 1
+
+    def solution2(self, nums):
+        if not nums:
+            return
+        lo, hi, index = 0, len(nums) - 1, 0
+        while index <= hi:
+            while nums[index] == 2 and index < hi:
+                self.exchange(nums, index, hi)
+                hi -= 1
+            while nums[index] == 0 and index > lo:
+                self.exchange(nums, index, lo)
+                lo += 1
+            index += 1
+
+    def exchange(self, nums, i, j):
+        nums[i] ^= nums[j]
+        nums[j] ^= nums[i]
+        nums[i] ^= nums[j]
 
 if __name__ == '__main__':
     nums = [0, 1, 2, 1, 0, 2, 1, 0, 2, 1, 0, 0, 1]
-    SortColors().solution1(nums)
+    SortColors().solution2(nums)
     print nums
 
