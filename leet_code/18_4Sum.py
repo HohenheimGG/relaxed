@@ -1,5 +1,5 @@
-#
-# Given an array S of n integers, are there elements a, b, c, and d in S such that a + b + c + d = target? Find all unique quadruplets in the array which gives the sum of target.
+# Given an array S of n integers, are there elements a, b, c, and d in S such that a + b + c + d = target?
+# Find all unique quadruplets in the array which gives the sum of target.
 #
 # Note: The solution set must not contain duplicate quadruplets.
 #
@@ -34,7 +34,7 @@ class FourSum:
 
         for index in range(0, length):
             z = nums[index]
-            if index != 0 and nums[index] == nums[index - 1]:
+            if index != 0 and z == nums[index - 1]:
                 continue
             if z + max * 3 < target:
                 continue
@@ -47,39 +47,39 @@ class FourSum:
 
         return result
 
-    def solution1ThreeSum(self, start, length, nums, target, result, z):
+    def solution1ThreeSum(self, start, end, nums, target, result, z):
 
-        if start + 1 >= length:
+        if start + 1 > end:
             return
-        max = nums[length]
+        max = nums[end]
         if 3 * nums[start] > target or 3 * max < target:
             return
 
-        for index in range(start, length):
+        for index in range(start, end + 1):
             z1 = nums[index]
             if index != start and z1 == nums[index - 1]:
                 continue
-            if 3 * z1 < target:
+            if z1 + max * 2 < target:
                 continue
-            if z1 + max * 2 > target:
+            if 3 * z1 > target:
                 break
-            if 3 * z1 == target and index + 2 < length and nums[index + 2] == z1:
+            if 3 * z1 == target and index + 1 < end and nums[index + 2] == z1:
                 result.append([z, z1, z1, z1])
                 break
-            self.solution1TwoSum(index, length, nums, target - z1, z, z1)
+            self.solution1TwoSum(index + 1, end, nums, target - z1, result, z, z1)
 
-    def solution1TwoSum(self, start, length, nums, target, result, z, z1):
+    def solution1TwoSum(self, start, end, nums, target, result, z, z1):
 
-        if start >= length:
+        if start >= end:
             return
-        max = nums[length]
+        max = nums[end]
         if nums[start] * 2 > target or max * 2 < target:
             return
-        i, j = start, length
+        i, j = start, end
         while i < j:
             sum = nums[i] + nums[j]
             if sum == target:
-                result.append(z, z1, nums[i], nums[j])
+                result.append([z, z1, nums[i], nums[j]])
                 while i + 1 < j and nums[i] == nums[i + 1]:
                     i += 1
                 while j - 1 > i and nums[j] == nums[j - 1]:
