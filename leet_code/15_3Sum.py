@@ -16,7 +16,7 @@ class ThreeSum:
         :type nums: List[int] 
         :return: 
         """
-        if(not nums or len(nums) < 3):
+        if not nums or len(nums) < 3:
             print "input error"
             return
         result = []
@@ -25,7 +25,7 @@ class ThreeSum:
         for i in range(0, length - 2):
             for j in range(i + 1, length - 1):
                 for k in range(j + 1, length):
-                    if(nums[i] + nums[j] + nums[k] == 0 and str(nums[i]) + str(nums[j]) + str(nums[k]) not in filter):
+                    if nums[i] + nums[j] + nums[k] == 0 and str(nums[i]) + str(nums[j]) + str(nums[k]) not in filter:
                         result.append([nums[i], nums[j], nums[k]])
                         filter.add(str(nums[i]) + str(nums[j]) + str(nums[k]))
                         filter.add(str(nums[i]) + str(nums[k]) + str(nums[j]))
