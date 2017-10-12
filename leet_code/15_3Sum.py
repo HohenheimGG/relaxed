@@ -38,9 +38,45 @@ class ThreeSum:
 
         return result
 
+    def solution2(self, nums):
+        """
+        
+        :type nums: List[int] 
+        :return: 
+        """
+        length = len(nums)
+        if not nums or length < 3:
+            print "input error"
+            return
+        nums.sort()
+        result = []
+        for index in range(0, length-2):
+            if index != 0 and nums[index] == nums[index - 1]:
+                continue
+
+            lo, hi, sum = index + 1, length - 1, 0 - nums[index]
+            while(lo < hi):
+                if nums[lo] + nums[hi] == sum:
+                    result.append([nums[lo], nums[hi], sum])
+                    while(lo < hi and nums[lo] == nums[lo + 1]):
+                        lo += 1
+                    while(lo < hi and nums[hi] == nums[hi - 1]):
+                        hi -= 1
+                    lo += 1
+                    hi -= 1
+                elif nums[lo] + nums[hi] < sum:
+                    while(lo < hi and nums[lo] == nums[lo + 1]):
+                        lo += 1
+                    lo += 1
+                else:
+                    while(lo < hi and nums[hi] == nums[hi -1]):
+                        hi -= 1
+                    hi -= 1
+
+        return result
 
 if __name__ == '__main__':
     nums = [-1, 0, 1, 2, -1, -4]
-    result = ThreeSum().solution1(nums)
+    result = ThreeSum().solution2(nums)
     print result
 
