@@ -4,6 +4,8 @@
 # the contiguous subarray [4,-1,2,1] has the largest sum = 6.
 
 class MaximumSubarray:
+
+    ##时间复杂度: (n^2 + n) / 2
     def solution1(self, nums):
         if not nums:
             return None
