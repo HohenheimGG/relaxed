@@ -28,6 +28,8 @@ class LongestConsecutiveSequence:
         return max
 
     def solution2(self, nums):
+        if not nums:
+            return -1
         map = {}
         res = 1
         for n in nums:
@@ -43,6 +45,20 @@ class LongestConsecutiveSequence:
             map[n - left] = sum
             map[n + right] = sum
         return res
+
+    def solution3(self, nums):
+        if not nums:
+            return -1
+        nums = set(nums)
+        max = 0
+        for n in nums:
+            if n - 1 in nums:
+                continue
+            y = n + 1
+            while y in nums:
+                y += 1
+            max = max(y - x, max)
+        return max
 
 if __name__ == '__main__':
     nums = [100, 4, 200, 1, 2, 3, 5, 9, 20, 21, 22, 23]
