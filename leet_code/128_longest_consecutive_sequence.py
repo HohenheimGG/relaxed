@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 # Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
 #
 # For example,
@@ -26,7 +27,24 @@ class LongestConsecutiveSequence:
                 count = 1
         return max
 
+    def solution2(self, nums):
+        map = {}
+        res = 1
+        for n in nums:
+            if n in map:
+                continue
+            left = map[n - 1] if n - 1 in map else 0
+            right = map[n + 1] if n + 1 in map else 0
+            sum = left + right + 1
+            map[n] = sum
+
+            res = max(sum, res)
+
+            map[n - left] = sum
+            map[n + right] = sum
+        return res
+
 if __name__ == '__main__':
-    nums = [100, 4, 200, 1, 2, 5, 9, 20, 21, 22, 23]
-    result = LongestConsecutiveSequence().solution1(nums)
+    nums = [100, 4, 200, 1, 2, 3, 5, 9, 20, 21, 22, 23]
+    result = LongestConsecutiveSequence().solution2(nums)
     print result
