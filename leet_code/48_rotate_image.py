@@ -50,7 +50,7 @@ class RotateImage:
         columns = len(nums[0])
         for row in range(0, int(math.floor(rows / 2))):
             for column in range(row, columns - 1):
-                temp = nums[column][columns - row- 1]
+                temp = nums[column][columns - row - 1]
                 nums[column][columns - row - 1] = nums[row][column]#top | right
 
                 temp ^= nums[rows - row - 1][columns - column - 1]#bottom | right

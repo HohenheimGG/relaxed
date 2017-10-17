@@ -21,7 +21,7 @@ class LongestConsecutiveSequence:
         for i in range(1, len(nums)):
             if nums[i] - nums[i - 1] == 1:
                 count += 1
-                if(max < count):
+                if max < count:
                     max = count
             else:
                 count = 1
