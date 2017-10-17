@@ -53,15 +53,15 @@ class RotateImage:
                 temp = nums[column][columns - row- 1]
                 nums[column][columns - row - 1] = nums[row][column]#top | right
 
-                temp ^= nums[rows - row - 1][columns - column - 1]
+                temp ^= nums[rows - row - 1][columns - column - 1]#bottom | right
                 nums[rows - row - 1][columns - column - 1] ^= temp
                 temp ^= nums[rows - row - 1][columns - column - 1]
 
-                temp ^= nums[columns - column - 1][row]
+                temp ^= nums[columns - column - 1][row]#bottom | left
                 nums[columns - column - 1][row] ^= temp
                 temp ^= nums[columns - column - 1][row]
 
-                temp ^= nums[row][column]
+                temp ^= nums[row][column]#top | left
                 nums[row][column] ^= temp
                 temp ^= nums[row][column]
 
