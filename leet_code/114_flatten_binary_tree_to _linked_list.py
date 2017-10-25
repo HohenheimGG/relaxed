@@ -27,7 +27,9 @@ class Tree:
         self.right = None
         self.left = None
 
+
 class FlattenBinaryTreeToLinkedList:
+
     def __init__(self):
         self.prev = None
 
@@ -44,18 +46,27 @@ class FlattenBinaryTreeToLinkedList:
         self.recursive1(root.left)
         root.right = self.prev
         root.left = None
-        prev = root
+        self.prev = root
 
     def solution2(self, root):
         if not root:
             return None
 
-    def recursive2(self, root, prev):
+    def recursive2(self, root):
         if not root:
             return
-        if not root.left and not root.right:
-            return root
-        if not root.right:
+        left = root.left
+        right = root.right
+        self.recursive2(left)
+        self.recursive2(right)
+
+        root.left = None
+        root.right = left
+
+        cur = root
+        while cur.right:
+            cur = cur.right
+        cur.right = right
 
 if __name__ == '__main__':
     pass
