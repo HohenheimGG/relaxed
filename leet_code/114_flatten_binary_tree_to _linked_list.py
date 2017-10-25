@@ -34,15 +34,28 @@ class FlattenBinaryTreeToLinkedList:
     def solution1(self, root):
         if not root:
             return None
+        self.recursive1(root)
+        return root
 
-    def recursive(self, root):
+    def recursive1(self, root):
         if root is None:
             return
-        self.recursive(root.right)
-        self.recursive(root.left)
+        self.recursive1(root.right)
+        self.recursive1(root.left)
         root.right = self.prev
         root.left = None
         prev = root
+
+    def solution2(self, root):
+        if not root:
+            return None
+
+    def recursive2(self, root, prev):
+        if not root:
+            return
+        if not root.left and not root.right:
+            return root
+        if not root.right:
 
 if __name__ == '__main__':
     pass
