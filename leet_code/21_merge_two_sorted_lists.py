@@ -8,7 +8,7 @@ class ListNode:
         self.next = next
 
 
-class MergeTwoSortedList:
+class MergeTwoSortedList(object):
     def solution1(self, list1, list2):
         if not list1 and list2:
             return None
