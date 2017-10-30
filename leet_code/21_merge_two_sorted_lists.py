@@ -19,7 +19,7 @@ class MergeTwoSortedList:
 
         node = None
         start = None
-        while list1 is not None and list2 is not None:
+        while list1 and list2 :
             if node is None:
                 if list1.val < list2.val:
                     node = list1
@@ -54,6 +54,28 @@ class MergeTwoSortedList:
                 node = node.next
             node = node.next
         return start
+
+    def solution2(self, list1, list2):
+        if not list1 and list2:
+            return None
+        if not list1:
+            return list2
+        if not list2:
+            return list1
+        return self.recursive(list1, list2)
+
+    def recursive(self, list1, list2):
+        if not list1:
+            return list2
+        if not list2:
+            return list2
+
+        if list1.val < list2.val:
+            list1.next = self.recursive(list1.next, list2)
+            return list1
+        else:
+            list2.next = self.recursive(list1, list2.next)
+            return list2
 
 if __name__ == "__main__":
     a = ListNode(0, ListNode(3, ListNode(5, ListNode(8))))
