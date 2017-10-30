@@ -17,43 +17,18 @@ class MergeTwoSortedList:
         if not list2:
             return list1
 
-        node = None
-        start = None
-        while list1 and list2 :
-            if node is None:
-                if list1.val < list2.val:
-                    node = list1
-                    list1 = list1.next
-                elif list2.val < list1.val:
-                    node = list2
-                    list2 = list2.next
-                else:
-                    node = list1
-                    list1 = list1.next
-                    node.next = list2
-                    list2 = list2.next
-                    node = node.next
-                start = node
-                continue
-
-            if list1 is None or list2 is None:
-                node.next = list1 if list2 is None else list2
-                break
-
-            if list1.val > list2.val:
-                node.next = list2
-                list2 = list2.next
-            elif list2.val > list1.val:
+        node = start = ListNode(0)
+        while list1 and list2:
+            if list1.val < list2.val:
                 node.next = list1
                 list1 = list1.next
             else:
-                node.next = list1
-                list1 = list1.next
-                node.next.next = list2
+                node.next = list2
                 list2 = list2.next
-                node = node.next
             node = node.next
-        return start
+
+        node.next = list1 or list2
+        return start.next
 
     def solution2(self, list1, list2):
         if not list1 and list2:
