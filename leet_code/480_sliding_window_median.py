@@ -30,7 +30,26 @@
 
 class SlidingWindowMedian(object):
     def solution1(self, nums, k):
-        pass
+        if not nums or k == 0:
+            return []
+        if k == 1:
+            return nums
+        length = len(nums)
+        end = k - 1
+        result = []
+        isOdd = k % 2 == 1
+
+        for start in range(0, length - end):
+            temp = nums[start:start + end + 1]
+            temp.sort()
+            if not isOdd:
+                result.append((temp[int(k / 2)] + temp[int(k / 2)] - 1) / 2)
+            else:
+                result.append(temp[int(k / 2)])
+        return result
 
 if __name__ == '__main__':
-    pass
+    nums = [1,3,-1,-3,5,3,6,7]
+    result = SlidingWindowMedian().solution1(nums, 3)
+    print result
+
