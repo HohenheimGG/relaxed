@@ -38,5 +38,33 @@ class LowestCommon(object):
             return root
         return left if not right else right
 
+    def solution2(self, root, vnode, wnode):
+        vstack, wstack = self.findPath(root, vnode), self.findPath(root, wnode)
+        vlen, wlen = len(vstack), len(wstack)
+        target, x, minLen = None, 0, min(vlen, wlen)
+        while x < minLen and vstack[x] == wstack[x]:
+            target, x = vstack[x], x + 1
+        return target
+
+    def findPath(self, root, target):
+        stack = []
+        lastVisitor = None
+        while stack or root:
+            if root:
+                stack.append(root)
+                root = root.left
+                continue
+            peek = stack[-1]
+            if peek.right and lastVisitor != peek.right:
+                root = root.right
+                continue
+            if peek == target:
+                return stack
+            lastVisitor = stack.pop()
+            root = None
+        return stack
+
+
+
 if __name__ == '__main__':
     pass
