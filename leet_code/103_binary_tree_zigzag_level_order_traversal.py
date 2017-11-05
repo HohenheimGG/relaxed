@@ -35,13 +35,14 @@ class ZigzagLevelOrder(object):
             return
         if len(result) < level + 1:
             result.append([])
-        result[level].append(root.val)
-        if (level + 1) % 2 == 0:
-            self.travel(root.left, result, level + 1)
-            self.travel(root.right, result, level + 1)
+
+        if level % 2 == 0:
+            result[level].append(root.val)
         else:
-            self.travel(root.right, result, level + 1)
-            self.travel(root.left, result, level + 1)
+            result[level].insert(0, root.val)
+
+        self.travel(root.left, result, level + 1)
+        self.travel(root.right, result, level + 1)
 
 if __name__ == '__main__':
     node1 = ListNode(1)
