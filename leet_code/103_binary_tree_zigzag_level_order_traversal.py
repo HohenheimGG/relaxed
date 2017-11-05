@@ -44,6 +44,32 @@ class ZigzagLevelOrder(object):
         self.travel(root.left, result, level + 1)
         self.travel(root.right, result, level + 1)
 
+    def solution2(self, root):
+        result = []
+        if not root:
+            return result
+
+        queue = []
+        level = 0
+        queue.append(root)
+        while len(queue) != 0:
+            result.append([])
+            size = len(queue)
+            for index in range(0, size):
+                item = queue[index]
+                if level % 2 == 0:
+                    result[level].append(item.val)
+                else:
+                    result[level].insert(0, item.val)
+                if item.left:
+                    queue.append(item.left)
+                if item.right:
+                    queue.append(item.right)
+            queue = queue[size:len(queue)]
+            level += 1
+        return result
+
+
 if __name__ == '__main__':
     node1 = ListNode(1)
     node2 = ListNode(2)
@@ -66,5 +92,5 @@ if __name__ == '__main__':
     node4.right = node9
     node5.left = node10
 
-    result = ZigzagLevelOrder().solution1(node1)
+    result = ZigzagLevelOrder().solution2(node1)
     print result
