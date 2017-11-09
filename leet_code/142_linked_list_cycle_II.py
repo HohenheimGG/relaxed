@@ -7,16 +7,19 @@ class ListNode(object):
 
 class ListCycle(object):
     def solution1(self, root):
-        if not root:
+        if not root or not root.next:
             return None
-        cur = root.next
-        isCycle = False
-        while cur:
-            if cur == root:
-                isCycle = True
-                break
-            cur = cur.next
-        return root if isCycle else None
+        slow, fast = root, root
+        while slow and fast:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                slow1 = root
+                while slow1 != slow:
+                    slow1 = slow1.next
+                    slow = slow.next
+                return slow1
+        return None
 
 
 if __name__ == '__main__':
