@@ -14,11 +14,13 @@
 #
 # In this case, no transaction is done, i.e. max profit = 0.
 
+import sys
+
 class BestTimeToBuyAndSell(object):
     def solution1(self, nums):
         if not nums:
             return 0
-        min = 0
+        min = nums[0]
         minIndex = 0
         for index in range(0, len(nums)):
             if nums[index] < min:
@@ -32,3 +34,24 @@ class BestTimeToBuyAndSell(object):
         if max > min:
             return max - min
         return 0
+
+    def solution2(self, nums):
+        if not nums:
+            return 0
+        min = nums[0]
+        max = 0
+        for item in nums:
+            if item < min:
+                min = item
+                max = 0
+            elif item == min:
+                continue
+            elif item > min and max < item:
+                max = item
+        return max if max == 0 else max - min
+
+if __name__ == '__main__':
+    nums = [7, 1, 5, 3, 6, 4]
+    # nums = [7, 6, 4, 3, 1]
+    result = BestTimeToBuyAndSell().solution2(nums)
+    print result
