@@ -41,7 +41,21 @@ class RotateFunction(object):
             index += 1
         return max
 
+    def solution2(self, nums):
+        sum = 0
+        F = 0
+        size = len(nums)
+        for index in range(0, size):
+            sum += nums[index]
+            F += index * nums[index]
+
+        maxValue = F
+        for index in range(size - 1, -1, -1):
+            F += sum - size * nums[index]
+            maxValue = max(F, maxValue)
+        return maxValue
+
 if __name__ == '__main__':
     nums = [4, 3, 2, 6]
-    result = RotateFunction().solution1(nums)
+    result = RotateFunction().solution2(nums)
     print result
