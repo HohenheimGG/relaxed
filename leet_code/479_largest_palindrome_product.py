@@ -1,3 +1,4 @@
+# coding: utf-8
 # Find the largest palindrome made from the product of two n-digit numbers.
 #
 # Since the result could be very large, you should return the largest palindrome mod 1337.
@@ -20,9 +21,13 @@ class LargestPalindromeProduct(object):
     def solution1(self, n):
         if n == 1:
             return 9
+        # 最大值
         upper = math.pow(10, n) - 1
+        # 最小值
         lower = upper / 10 + 1
+        # 最大求值
         maxNumber = upper * upper
+        # 将回文折半
         half = maxNumber / math.pow(10, n)
         hasPalindrome = False
         palindrome = 0
@@ -38,4 +43,6 @@ class LargestPalindromeProduct(object):
         return palindrome % 1337
 
     def createPalindrome(self, half):
-        return half[::-1]
+        half = str(half)
+        half = half.join(half[::-1])
+        return float(half)
