@@ -57,7 +57,7 @@ class LongestConsecutiveSequence:
             y = n + 1
             while y in nums:
                 y += 1
-            max = max(y - x, max)
+            max = max(y - 1, max)
         return max
 
 if __name__ == '__main__':

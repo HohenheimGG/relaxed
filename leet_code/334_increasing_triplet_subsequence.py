@@ -13,6 +13,7 @@
 # Given [5, 4, 3, 2, 1],
 # return false.
 
+
 import sys
 
 class IncreasingTripletSubsequence(object):
