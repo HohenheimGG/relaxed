@@ -13,6 +13,7 @@
 # in which case the line will obviously cross no bricks.
 
 import sys
+import collections
 
 class brick_wall(object):
     def solution1(self, nums):
@@ -43,6 +44,17 @@ class brick_wall(object):
                 return 1
         return 1
 
+    def solution2(self, nums):
+        temp = collections.Counter()
+        for brick in nums:
+            sum = 0
+            for b in brick:
+                if sum:
+                    temp[sum] += 1
+                sum += b
+
+        return len(nums) - max(temp.values() or [0])
+
 
 if __name__ == '__main__':
     nums = [
@@ -53,6 +65,6 @@ if __name__ == '__main__':
         [3, 1, 2],
         [1, 3, 1, 1]
     ]
-    result = brick_wall().solution1(nums)
+    result = brick_wall().solution2(nums)
     print result
     pass
